@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientForFilmFestival.view.FilmOverviewController">
+   <padding>
+      <Insets bottom="5.0" left="5.0" />
+   </padding>
+   <children>
+      <SplitPane dividerPositions="0.9083969465648855" layoutX="114.0" layoutY="14.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="filmTable" layoutX="52.0" layoutY="51.0" prefHeight="354.0" prefWidth="593.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="dateColumn" prefWidth="75.0" text="date" />
+                      <TableColumn fx:id="filmColumn" prefWidth="75.0" text="film" />
+                        <TableColumn fx:id="directorColumn" prefWidth="75.0" text="director" />
+                        <TableColumn fx:id="cinemaColumn" prefWidth="75.0" text="cinema" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <ToolBar layoutX="413.0" layoutY="-1.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="33.0" prefWidth="593.0">
+                    <items>
+                      <Button fx:id="addButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddButton" prefWidth="50.0" text="add" />
+                        <Button fx:id="editButton" layoutX="10.0" layoutY="13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditButton" prefWidth="50.0" text="edit" />
+                        <Button fx:id="deleteButton" layoutX="64.0" layoutY="13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteBtton" prefWidth="50.0" text="delete" textAlignment="JUSTIFY" textFill="#da3838" />
+                    </items>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </ToolBar>
+                  <Button fx:id="quitButton" layoutY="-1.0" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="33.0" prefWidth="69.0" text="quit" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" right="5.0" />
+               </padding>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
