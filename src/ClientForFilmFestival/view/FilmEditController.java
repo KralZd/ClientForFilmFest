@@ -18,18 +18,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class FilmEditController {
-    
+
     @FXML
     private Button cancelButton;
-    
+
     @FXML
     private TextField movieField;
-    
+
     @FXML
     private TextField cinemaField;
 
@@ -37,13 +38,13 @@ public class FilmEditController {
     private TextField dateField;*/
     @FXML
     private DatePicker dateField;
-    
+
     @FXML
     private Button okButton;
-    
+
     @FXML
     private TextField directorField;
-    
+
     private Stage dialogStage;
     Movie movie;
     private boolean okClicked = false;
@@ -54,6 +55,16 @@ public class FilmEditController {
      */
     @FXML
     private void initialize() {
+        LocalDate minDate = LocalDate.of(2019, 3, 06);
+        LocalDate maxDate = LocalDate.of(2019, 3, 17);
+        dateField.setDayCellFactory(d -> new DateCell() {
+
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                setDisable(item.isAfter(maxDate) || item.isBefore(minDate));
+            }
+        });
     }
 
     /**
@@ -64,38 +75,38 @@ public class FilmEditController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-    
+
     private LocalDate setDate() {
         LocalDate date;
-        
+
         if (movie.getDate().equals("")) {
-            date = LocalDate.now();
+            date = LocalDate.of(2019, 03, 06);
         } else {
             date = LocalDate.parse(movie.getDate());
         }
-        
+
         return date;
     }
-    
+
     public void setMovie(Movie movie) {
         this.movie = movie;
-        
+
         LocalDate date = setDate();
-        
+
         dateField.setValue(date);
         movieField.setText(movie.getFilm());
         directorField.setText(movie.getDirector());
         cinemaField.setText(movie.getCinema());
-        
+
     }
 
     public Movie getMovie() {
-        
+
         movie.setDate(dateField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         movie.setFilm(movieField.getText());
         movie.setDirector(directorField.getText());
         movie.setCinema(cinemaField.getText());
-        
+
         return movie;
     }
 
@@ -114,7 +125,7 @@ public class FilmEditController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            
+
             okClicked = true;
             dialogStage.close();
         }
@@ -145,7 +156,7 @@ public class FilmEditController {
         if (directorField.getText() == null || directorField.getText().length() == 0) {
             errorMessage += "No valid director!\n";
         }
-        
+
         if (cinemaField.getText() == null || cinemaField.getText().length() == 0) {
             errorMessage += "No valid cinema!\n";
 
@@ -156,7 +167,7 @@ public class FilmEditController {
                 errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
             }*/
         }
-        
+
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -166,11 +177,11 @@ public class FilmEditController {
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);
-            
+
             alert.showAndWait();
-            
+
             return false;
         }
     }
-    
+
 }
